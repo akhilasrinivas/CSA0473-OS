@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <pthread.h>
+
+void *threadFunction(void *arg) {
+    printf("Hello from the thread!\n");
+    pthread_exit(NULL);
+}
+
+int main() {
+    pthread_t tid; // Thread ID
+    pthread_create(&tid, NULL, threadFunction, NULL);
+
+    // Ensure the main thread waits for the created thread to finish
+    pthread_join(tid, NULL);
+
+    printf("Back to the main thread.\n");
+
+    return 0;
+}
